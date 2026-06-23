@@ -1,0 +1,19 @@
+# macOS
+.DS_Store
+
+# Lokale Tool-/Editor-Konfig (nicht deployen)
+.claude/
+
+# Interne Notizen — NICHT öffentlich stellen
+STATUS.md
+README.md
+ANLEITUNG-launch-und-google.md
+
+# Build-/Hilfsskripte (nicht fürs Web nötig)
+tools/
+
+# Unbenutzte Original-Rohfotos
+Apartment Sophie 2 Bedrooms/
+
+# Backups
+*.bak
