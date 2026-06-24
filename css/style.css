@@ -178,7 +178,6 @@ h1, h2, h3 { font-family: var(--font-head); font-weight: 600; line-height: 1.1; 
   .hero h1 { font-size: clamp(2.1rem, 8.5vw, 3rem); margin-bottom: 16px; }
   .hero p { font-size: 1.05rem; margin-bottom: 22px; }
   .hero__actions { gap: 10px; }
-  .hero__actions .btn { width: 100%; max-width: 300px; }
   .hero__meta { margin-top: 28px; gap: 16px 24px; }
   .hero__scroll { display: none; }
 }
