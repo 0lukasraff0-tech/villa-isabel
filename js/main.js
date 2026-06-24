@@ -197,7 +197,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
   /* ---------- Cinematic Video-Band: Drohnenshots sanft überblenden ---------- */
   const cineVids = document.querySelectorAll(".cine__video");
-  if (cineVids.length > 1) {
+  // Auf kleinen Screens (Handy) nur das erste Video abspielen — spart Mobilfunk-Daten.
+  var cineMobile = window.matchMedia && window.matchMedia("(max-width: 700px)").matches;
+  if (cineVids.length && cineMobile) {
+    cineVids[0].play && cineVids[0].play().catch(() => {});
+  } else if (cineVids.length > 1) {
     cineVids[0].play && cineVids[0].play().catch(() => {});
     let ci = 0;
     setInterval(() => {
