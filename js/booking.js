@@ -1,8 +1,9 @@
 /* =========================================================
-   Villa Isabel — Buchungs-Panel mit visuellem Kalender
-   Ruhiges Monatsblatt mit Zeitraum-Auswahl; „Anfragen" öffnet
-   eine vorausgefüllte WhatsApp-Nachricht. Platzhalter bis zum
-   echten Channel-Manager-Widget.
+   Villa Isabel — Buchungs-Modal mit visuellem Kalender
+   Öffnet sich zentriert beim Klick auf einen [data-book]-Button
+   (z. B. „Terra anfragen"). Schließen per X, Overlay-Klick oder Esc.
+   „Anfragen" öffnet eine vorausgefüllte WhatsApp-Nachricht.
+   Platzhalter bis zum echten Channel-Manager-Widget.
    ========================================================= */
 (function () {
   var MONATE = ["Januar", "Februar", "März", "April", "Mai", "Juni",
@@ -14,14 +15,11 @@
   }
   function sameDay(a, b) { return a && b && a.toDateString() === b.toDateString(); }
 
-  function init(card) {
-    var apt = card.getAttribute("data-apartment") || "";
-    var wa = card.getAttribute("data-whatsapp") || "";
+  function initCalendar(card) {
     var view = new Date(); view.setDate(1); view.setHours(0, 0, 0, 0);
     var start = null, end = null;
-
     var grid = card.querySelector(".cal__grid");
-    var title = card.querySelector(".cal__title");
+    var titleEl = card.querySelector(".cal__title");
     var rangeEl = card.querySelector(".booking-card__range");
 
     function updateRange() {
@@ -31,12 +29,12 @@
     }
 
     function render() {
-      title.textContent = MONATE[view.getMonth()] + " " + view.getFullYear();
+      titleEl.textContent = MONATE[view.getMonth()] + " " + view.getFullYear();
       grid.innerHTML = "";
       DOW.forEach(function (d) {
         var el = document.createElement("div"); el.className = "cal__dow"; el.textContent = d; grid.appendChild(el);
       });
-      var startDow = (view.getDay() + 6) % 7; // Montag = 0
+      var startDow = (view.getDay() + 6) % 7;
       var days = new Date(view.getFullYear(), view.getMonth() + 1, 0).getDate();
       var today = new Date(); today.setHours(0, 0, 0, 0);
       for (var i = 0; i < startDow; i++) {
@@ -70,8 +68,11 @@
       view.setMonth(view.getMonth() + 1); render();
     });
     card.querySelector(".booking-card__submit").addEventListener("click", function () {
+      var apt = card.getAttribute("data-apartment") || "";
+      var wa = card.getAttribute("data-whatsapp") || "";
       var guests = card.querySelector(".booking-card__guests select").value;
-      var text = "Hi! Ich interessiere mich für Apartment " + apt + " in der Villa Isabel:\n\n" +
+      var wofuer = apt ? ("Apartment " + apt) : "die Villa Isabel";
+      var text = "Hi! Ich interessiere mich für " + wofuer + ":\n\n" +
         "• Anreise: " + (start ? fmt(start) : "—") + "\n" +
         "• Abreise: " + (end ? fmt(end) : "—") + "\n" +
         "• Gäste: " + guests + "\n\n" +
@@ -83,6 +84,31 @@
   }
 
   document.addEventListener("DOMContentLoaded", function () {
-    Array.prototype.forEach.call(document.querySelectorAll(".booking-card"), init);
+    var modal = document.getElementById("booking-modal");
+    if (!modal) return;
+    var card = modal.querySelector(".booking-card");
+    var heading = card.querySelector("h3");
+    initCalendar(card);
+
+    function open(apt) {
+      card.setAttribute("data-apartment", apt || "");
+      heading.textContent = apt ? ("Apartment " + apt + " buchen") : "Verfügbarkeit anfragen";
+      modal.hidden = false;
+      document.body.style.overflow = "hidden";
+    }
+    function close() {
+      modal.hidden = true;
+      document.body.style.overflow = "";
+    }
+
+    Array.prototype.forEach.call(document.querySelectorAll("[data-book]"), function (btn) {
+      btn.addEventListener("click", function (e) { e.preventDefault(); open(btn.getAttribute("data-book")); });
+    });
+    Array.prototype.forEach.call(modal.querySelectorAll("[data-close]"), function (el) {
+      el.addEventListener("click", close);
+    });
+    document.addEventListener("keydown", function (e) {
+      if (e.key === "Escape" && !modal.hidden) close();
+    });
   });
 })();

@@ -70,7 +70,7 @@
         </div>
         <div class="hero__actions" style="justify-content:center">
           <a href="gallery-sophia.html" class="btn btn--ghost">Alle Fotos ansehen</a>
-          <a href="contact.html#anfrage" class="btn btn--primary">Sophia anfragen</a>
+          <a href="contact.html#anfrage" class="btn btn--primary" data-book="Sophia">Sophia anfragen</a>
           <a href="#" data-whatsapp class="btn btn--wa">WhatsApp</a>
         </div>
       </div>
@@ -97,7 +97,7 @@
         </div>
         <div class="hero__actions" style="justify-content:center">
           <a href="gallery-terra.html" class="btn btn--ghost">Alle Fotos ansehen</a>
-          <a href="contact.html#anfrage" class="btn btn--primary">Terra anfragen</a>
+          <a href="contact.html#anfrage" class="btn btn--primary" data-book="Terra">Terra anfragen</a>
           <a href="#" data-whatsapp class="btn btn--wa">WhatsApp</a>
         </div>
       </div>
@@ -124,7 +124,7 @@
         </div>
         <div class="hero__actions" style="justify-content:center">
           <a href="gallery-azure.html" class="btn btn--ghost">Alle Fotos ansehen</a>
-          <a href="contact.html#anfrage" class="btn btn--primary">Azure anfragen</a>
+          <a href="contact.html#anfrage" class="btn btn--primary" data-book="Azure">Azure anfragen</a>
           <a href="#" data-whatsapp class="btn btn--wa">WhatsApp</a>
         </div>
       </div>
@@ -179,7 +179,41 @@
   </footer>
 
   <a href="#" data-whatsapp class="wa-float" aria-label="WhatsApp">💬</a>
+
+  <!-- Buchungs-Modal (öffnet sich über die orangenen „… anfragen"-Buttons) -->
+  <div class="modal" id="booking-modal" hidden>
+    <div class="modal__overlay" data-close></div>
+    <div class="modal__dialog" role="dialog" aria-modal="true" aria-label="Verfügbarkeit anfragen">
+      <button class="modal__x" type="button" data-close aria-label="Schließen">×</button>
+      <div class="booking-card" data-apartment="" data-whatsapp="385955555512">
+        <p class="eyebrow">Verfügbarkeit</p>
+        <h3>Verfügbarkeit anfragen</h3>
+        <p class="booking-card__sub">Zeitraum wählen und unverbindlich anfragen — wir antworten meist in Minuten.</p>
+        <div class="cal__head">
+          <span class="cal__title">Monat</span>
+          <span class="cal__nav">
+            <button type="button" class="cal__prev" aria-label="Vorheriger Monat">‹</button>
+            <button type="button" class="cal__next" aria-label="Nächster Monat">›</button>
+          </span>
+        </div>
+        <div class="cal__grid"></div>
+        <div class="booking-card__foot">
+          <span class="booking-card__range">Zeitraum wählen</span>
+          <span class="booking-card__guests">
+            <label for="bc-guests">Gäste</label>
+            <select id="bc-guests">
+              <option>1</option><option selected>2</option><option>3</option>
+              <option>4</option><option>5</option><option>6</option>
+            </select>
+          </span>
+        </div>
+        <button type="button" class="btn btn--primary booking-card__submit">Anfragen</button>
+      </div>
+    </div>
+  </div>
+
   <script src="js/main.js"></script>
+  <script src="js/booking.js"></script>
   <script src="js/i18n.js"></script>
   <!-- Vercel Web Analytics (Besucher/Quellen, datenschutzfreundlich) -->
   <script defer src="/_vercel/insights/script.js"></script>
