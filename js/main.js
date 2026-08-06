@@ -20,7 +20,7 @@ const CONFIG = {
   address: "Ivana i Matka Baštijana 2B, 51211 Matulji, Kroatien",
 
   // E-Mail für das Kontaktformular (Fallback ohne Server):
-  email: "info@villa-isabel.example",
+  email: "villaisabelhr@gmail.com",
 };
 
 /* ---------- Mobile-Navigation ---------- */
@@ -142,6 +142,27 @@ document.addEventListener("DOMContentLoaded", () => {
       const ok = document.querySelector("#form-success");
       if (ok) ok.style.display = "block";
       form.reset();
+    });
+  }
+
+  /* ---------- Hero-Suchleiste: „Verfügbarkeit prüfen" → vorausgefüllte WhatsApp-Anfrage ---------- */
+  const heroSearch = document.querySelector("#hero-search");
+  if (heroSearch) {
+    heroSearch.addEventListener("submit", e => {
+      e.preventDefault();
+      const d = new FormData(heroSearch);
+      const anreise = d.get("anreise") || "—";
+      const abreise = d.get("abreise") || "—";
+      const gaeste = d.get("gaeste") || "—";
+      const text =
+`Hi! Ich möchte die Verfügbarkeit in der Villa Isabel prüfen:
+
+• Anreise: ${anreise}
+• Abreise: ${abreise}
+• Gäste: ${gaeste}
+
+Ist in diesem Zeitraum etwas frei?`;
+      window.open(`https://wa.me/${CONFIG.whatsapp}?text=${encodeURIComponent(text)}`, "_blank", "noopener");
     });
   }
 

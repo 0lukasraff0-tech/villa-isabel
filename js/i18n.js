@@ -238,6 +238,8 @@
     "Gesamte Villa (bis 16 Gäste)": { en: "Whole villa (up to 16 guests)", hr: "Cijela vila (do 16 gostiju)" },
     "Anreise": { en: "Arrival", hr: "Dolazak" },
     "Abreise": { en: "Departure", hr: "Odlazak" },
+    "Gäste": { en: "Guests", hr: "Gosti" },
+    "Verfügbarkeit prüfen": { en: "Check availability", hr: "Provjeri dostupnost" },
     "Anzahl Gäste": { en: "Number of guests", hr: "Broj gostiju" },
     "Nachricht": { en: "Message", hr: "Poruka" },
     "Anfrage über WhatsApp senden": { en: "Send enquiry via WhatsApp", hr: "Pošalji upit putem WhatsAppa" },

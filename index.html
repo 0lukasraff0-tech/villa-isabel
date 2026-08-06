@@ -127,9 +127,32 @@
       <p class="eyebrow" style="color:#e9b694">Kvarner Bucht · Kroatien</p>
       <h1>Eine Villa.<br />Drei Apartments.<br />Ein Sommer zum Bleiben.</h1>
       <p>Neu, modern und mit Blick auf die ganze Kvarner Bucht aus jedem Zimmer — mit Pool, Aufzug und Opatija nur Minuten entfernt.</p>
+      <form class="hero-search" id="hero-search" aria-label="Verfügbarkeit prüfen">
+        <div class="hero-search__field">
+          <label for="hs-in">Anreise</label>
+          <input type="date" id="hs-in" name="anreise" required />
+        </div>
+        <div class="hero-search__field">
+          <label for="hs-out">Abreise</label>
+          <input type="date" id="hs-out" name="abreise" required />
+        </div>
+        <div class="hero-search__field">
+          <label for="hs-guests">Gäste</label>
+          <select id="hs-guests" name="gaeste">
+            <option value="1">1</option>
+            <option value="2" selected>2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+            <option value="6">6</option>
+            <option value="7">7</option>
+            <option value="8">8+</option>
+          </select>
+        </div>
+        <button type="submit" class="btn btn--primary hero-search__submit">Verfügbarkeit prüfen</button>
+      </form>
       <div class="hero__actions">
-        <a href="apartments.html" class="btn btn--primary">Apartments ansehen</a>
-        <a href="contact.html#anfrage" class="btn btn--ghost">Verfügbarkeit anfragen</a>
+        <a href="apartments.html" class="btn btn--ghost">Apartments ansehen</a>
       </div>
       <div class="hero__meta">
         <div><strong>3</strong>Apartments</div>
