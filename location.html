@@ -52,12 +52,26 @@
   <section class="section section--tight" style="padding-top:0">
     <div class="container split">
       <div class="split__media">
-        <iframe
-          title="Standort Villa Isabel auf Google Maps"
-          src="https://maps.google.com/maps?q=Ivana%20i%20Matka%20Ba%C5%A1tijana%202B%2C%2051211%20Matulji&amp;z=14&amp;output=embed"
-          style="width:100%;min-height:380px;border:0;border-radius:var(--radius);box-shadow:var(--shadow-sm)"
-          loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        <div id="map-consent" style="width:100%;min-height:380px;border-radius:var(--radius);box-shadow:var(--shadow-sm);background:#eceeed;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:14px;padding:28px">
+          <p style="max-width:360px;margin:0;color:#55504a">Beim Laden der Karte werden Daten an Google übertragen.</p>
+          <button type="button" class="btn btn--primary" id="map-load">Karte laden</button>
+        </div>
       </div>
+      <script>
+        (function () {
+          var b = document.getElementById("map-load");
+          if (!b) return;
+          b.addEventListener("click", function () {
+            var box = document.getElementById("map-consent");
+            var f = document.createElement("iframe");
+            f.title = "Standort Villa Isabel auf Google Maps";
+            f.src = "https://maps.google.com/maps?q=Ivana%20i%20Matka%20Ba%C5%A1tijana%202B%2C%2051211%20Matulji&z=14&output=embed";
+            f.setAttribute("style", "width:100%;min-height:380px;border:0;border-radius:var(--radius);box-shadow:var(--shadow-sm)");
+            f.loading = "lazy"; f.referrerPolicy = "no-referrer-when-downgrade";
+            box.parentNode.replaceChild(f, box);
+          });
+        })();
+      </script>
       <div class="split__body">
         <p class="eyebrow">So findest du uns</p>
         <h2>Ruhig gelegen, alles in Reichweite</h2>
@@ -175,6 +189,7 @@
       </div>
       <div class="footer-bottom">
         <span>© 2026 Villa Isabel · Matulji, Kroatien</span>
+        <span><a href="impressum.html">Impressum</a> · <a href="datenschutz.html">Datenschutz</a></span>
         <span>An der Kvarner Bucht · Kroatien</span>
       </div>
     </div>
