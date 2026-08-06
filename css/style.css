@@ -551,3 +551,46 @@ h1, h2, h3 { font-family: var(--font-head); font-weight: 600; line-height: 1.1; 
   .footer-grid { grid-template-columns: 1fr; }
   .hero__meta { gap: 20px; }
 }
+
+/* ---------- Buchungs-Panel mit Kalender ---------- */
+.booking { display: flex; justify-content: center; }
+.booking-card {
+  width: 100%; max-width: 430px; background: #fff;
+  border: 1px solid var(--c-line); border-radius: 20px;
+  box-shadow: 0 24px 64px rgba(20,53,64,0.12);
+  padding: 30px 28px 26px; text-align: left;
+}
+.booking-card .eyebrow { text-align: left; margin-bottom: 2px; }
+.booking-card h3 {
+  font-family: var(--font-head); font-size: 1.7rem; font-weight: 600;
+  color: var(--c-sea); margin: 0 0 4px;
+}
+.booking-card__sub { color: #6b6259; font-size: 0.94rem; margin: 0 0 22px; }
+.cal__head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px; }
+.cal__title { font-family: var(--font-head); font-size: 1.18rem; color: #2b2622; }
+.cal__nav { display: flex; gap: 6px; }
+.cal__nav button {
+  width: 34px; height: 34px; border: 1px solid var(--c-line); background: #fff;
+  border-radius: 9px; cursor: pointer; font-size: 1rem; color: var(--c-sea); line-height: 1;
+}
+.cal__nav button:hover { background: #f4efe7; }
+.cal__grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 2px; }
+.cal__dow { text-align: center; font-size: 0.68rem; letter-spacing: 0.05em; text-transform: uppercase; color: #a49b90; padding: 6px 0; }
+.cal__day {
+  height: 42px; display: flex; align-items: center; justify-content: center;
+  font-size: 0.92rem; border: none; background: none; cursor: pointer; color: #2b2622; border-radius: 9px;
+}
+.cal__day:hover:not(:disabled):not(.range-start):not(.range-end) { background: #f4efe7; }
+.cal__day:disabled { color: #d3ccc1; cursor: default; }
+.cal__day.is-empty { visibility: hidden; }
+.cal__day.in-range { background: rgba(46,125,138,0.14); border-radius: 0; }
+.cal__day.range-start, .cal__day.range-end { background: var(--c-sea); color: #fff; }
+.cal__day.range-start { border-radius: 9px 0 0 9px; }
+.cal__day.range-end { border-radius: 0 9px 9px 0; }
+.cal__day.range-start.range-end { border-radius: 9px; }
+.booking-card__foot { display: flex; align-items: flex-end; justify-content: space-between; gap: 16px; margin-top: 20px; }
+.booking-card__range { font-size: 0.9rem; color: #55504a; flex: 1; }
+.booking-card__guests { display: flex; flex-direction: column; }
+.booking-card__guests label { font-size: 0.66rem; text-transform: uppercase; letter-spacing: 0.08em; color: #7a7168; margin: 0 0 4px 2px; }
+.booking-card__guests select { border: 1px solid var(--c-line); border-radius: 10px; padding: 9px 12px; font: inherit; background: #fff; cursor: pointer; }
+.booking-card__submit { width: 100%; margin-top: 18px; }
