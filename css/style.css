@@ -218,9 +218,8 @@ h1, h2, h3 { font-family: var(--font-head); font-weight: 600; line-height: 1.1; 
   .hero { min-height: calc(100svh - 72px); }
   .hero__inner { padding: 74px 24px 52px; }
   .hero h1 { font-size: clamp(2.7rem, 7.6vh, 4.8rem); margin-bottom: 16px; }
-  .hero p { font-size: 1.14rem; margin-bottom: 24px; }
-  /* Info-Leiste weicht der Suchleiste, damit alles ins flache Fenster passt */
-  .hero__meta { display: none; }
+  .hero p { font-size: 1.14rem; margin-bottom: 26px; }
+  .hero__meta { margin-top: 28px; }
   .hero__scroll { display: none; }
 }
 
