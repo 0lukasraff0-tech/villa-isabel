@@ -24,6 +24,13 @@
     "Impressum": { en: "Legal notice", hr: "Impresum" },
     "Datenschutz": { en: "Privacy", hr: "Privatnost" },
     "Karte laden": { en: "Load map", hr: "Učitaj kartu" },
+    "Dein Aufenthalt": { en: "Your stay", hr: "Vaš boravak" },
+    "Verfügbarkeit": { en: "Availability", hr: "Dostupnost" },
+    "Anfragen": { en: "Enquire", hr: "Pošalji upit" },
+    "Zeitraum wählen": { en: "Select dates", hr: "Odaberite razdoblje" },
+    "Zeitraum wählen und unverbindlich anfragen — wir antworten meist in Minuten.": { en: "Select your dates and enquire without obligation — we usually reply within minutes.", hr: "Odaberite razdoblje i pošaljite neobvezujući upit — obično odgovaramo u nekoliko minuta." },
+    "Am besten direkt bei uns — persönlicher Kontakt, flexibel und ohne Plattformgebühren.": { en: "Best booked directly with us — personal contact, flexible, no platform fees.", hr: "Najbolje izravno kod nas — osobni kontakt, fleksibilno i bez naknada platformi." },
+    "Du findest uns auch auf": { en: "You can also find us on", hr: "Pronađite nas i na" },
     "Beim Laden der Karte werden Daten an Google übertragen.": { en: "Loading the map transfers data to Google.", hr: "Učitavanjem karte podaci se prenose Googleu." },
     "Drei Apartments, ein Gemeinschaftspool und der Charme der kroatischen Riviera — bei Opatija an der Kvarner Bucht.": { en: "Three apartments, a shared pool and the charm of the Croatian Riviera — near Opatija on the Kvarner Bay.", hr: "Tri apartmana, zajednički bazen i šarm hrvatske rivijere — kraj Opatije na Kvarnerskom zaljevu." },
     "© 2026 Villa Isabel · Matulji, Kroatien": { en: "© 2026 Villa Isabel · Matulji, Croatia", hr: "© 2026 Villa Isabel · Matulji, Hrvatska" },
@@ -219,7 +226,7 @@
 
     // ---- Kontakt ----
     "Kontakt & Buchung": { en: "Contact & booking", hr: "Kontakt i rezervacija" },
-    "Per WhatsApp, über das Anfrageformular oder direkt über Booking & Airbnb — wähle einfach den Weg, der dir am liebsten ist.": { en: "Via WhatsApp, the enquiry form, or directly through Booking & Airbnb — simply choose whichever you prefer.", hr: "Putem WhatsAppa, obrasca za upit ili izravno preko Bookinga i Airbnba — odaberite što vam najviše odgovara." },
+    "Am schönsten direkt: Wunschtermine anfragen oder kurz per WhatsApp schreiben — wir antworten persönlich, meist innerhalb weniger Stunden.": { en: "Best booked directly: send us your preferred dates or a quick WhatsApp message — we reply personally, usually within a few hours.", hr: "Najljepše izravno: pošaljite željene termine ili kratku WhatsApp poruku — odgovaramo osobno, obično u roku od nekoliko sati." },
     "Direkter Draht": { en: "Direct line", hr: "Izravna linija" },
     "Am schnellsten per WhatsApp — meist antworten wir innerhalb weniger Stunden.": { en: "Fastest via WhatsApp — we usually reply within a few hours.", hr: "Najbrže putem WhatsAppa — obično odgovaramo unutar nekoliko sati." },
     "WhatsApp öffnen": { en: "Open WhatsApp", hr: "Otvori WhatsApp" },

@@ -83,9 +83,45 @@
     updateRange(); render();
   }
 
+  /* Modal-Markup einmalig erzeugen (falls nicht schon im HTML vorhanden) */
+  function ensureModal() {
+    var existing = document.getElementById("booking-modal");
+    if (existing) return existing;
+    var wrap = document.createElement("div");
+    wrap.className = "modal"; wrap.id = "booking-modal"; wrap.hidden = true;
+    wrap.innerHTML =
+      '<div class="modal__overlay" data-close></div>' +
+      '<div class="modal__dialog" role="dialog" aria-modal="true" aria-label="Verfügbarkeit anfragen">' +
+      '  <button class="modal__x" type="button" data-close aria-label="Schließen">×</button>' +
+      '  <div class="booking-card" data-apartment="" data-whatsapp="385955555512">' +
+      '    <p class="eyebrow">Verfügbarkeit</p>' +
+      '    <h3>Verfügbarkeit anfragen</h3>' +
+      '    <p class="booking-card__sub">Zeitraum wählen und unverbindlich anfragen — wir antworten meist in Minuten.</p>' +
+      '    <div class="cal__head">' +
+      '      <span class="cal__title">Monat</span>' +
+      '      <span class="cal__nav">' +
+      '        <button type="button" class="cal__prev" aria-label="Vorheriger Monat">‹</button>' +
+      '        <button type="button" class="cal__next" aria-label="Nächster Monat">›</button>' +
+      '      </span>' +
+      '    </div>' +
+      '    <div class="cal__grid"></div>' +
+      '    <div class="booking-card__foot">' +
+      '      <span class="booking-card__range">Zeitraum wählen</span>' +
+      '      <span class="booking-card__guests">' +
+      '        <label for="bc-guests">Gäste</label>' +
+      '        <select id="bc-guests"><option>1</option><option selected>2</option><option>3</option><option>4</option><option>5</option><option>6</option></select>' +
+      '      </span>' +
+      '    </div>' +
+      '    <button type="button" class="btn btn--primary booking-card__submit">Anfragen</button>' +
+      '  </div>' +
+      '</div>';
+    document.body.appendChild(wrap);
+    return wrap;
+  }
+
   document.addEventListener("DOMContentLoaded", function () {
-    var modal = document.getElementById("booking-modal");
-    if (!modal) return;
+    if (!document.querySelector("[data-book]")) return;
+    var modal = ensureModal();
     var card = modal.querySelector(".booking-card");
     var heading = card.querySelector("h3");
     initCalendar(card);

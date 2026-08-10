@@ -613,3 +613,8 @@ h1, h2, h3 { font-family: var(--font-head); font-weight: 600; line-height: 1.1; 
 }
 .modal__x:hover { background: #e6ddd0; }
 @keyframes modalPop { from { opacity: 0; transform: translateY(8px) scale(0.98); } to { opacity: 1; transform: none; } }
+
+/* Dezente Plattform-Fussnote (Kontaktkarte) */
+.platform-note { font-size: 0.82rem; color: #a49b90; margin-top: 14px; }
+.platform-note a { color: #7a7168; text-decoration: underline; text-underline-offset: 2px; }
+.platform-note a:hover { color: var(--c-sea); }

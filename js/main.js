@@ -73,25 +73,9 @@ document.addEventListener("DOMContentLoaded", () => {
   const waFloat = document.querySelector(".wa-float");
   if (waFloat) waFloat.innerHTML = waSvg;
 
-  /* ---------- WhatsApp-CTA-Blase: sanfte, unaufdringliche Einladung ---------- */
-  const ctaGet = () => { try { return sessionStorage.getItem("waCtaClosed"); } catch (e) { return null; } };
-  const ctaMark = () => { try { sessionStorage.setItem("waCtaClosed", "1"); } catch (e) {} };
-  if (waFloat && !ctaGet()) {
-    const cta = document.createElement("div");
-    cta.className = "wa-cta";
-    cta.innerHTML =
-      '<button class="wa-cta__close" aria-label="Schließen">×</button>' +
-      '<a class="wa-cta__link" target="_blank" rel="noopener">' +
-      '<span class="wa-cta__title">Dein Adria-Traum wartet</span>' +
-      '<span class="wa-cta__sub">Schreib uns — ganz unverbindlich. Antwort meist in Minuten.</span></a>';
-    document.body.appendChild(cta);
-    cta.querySelector(".wa-cta__link").setAttribute("href", `https://wa.me/${CONFIG.whatsapp}?text=${waText}`);
-    const closeCta = () => { cta.classList.remove("show"); ctaMark(); };
-    cta.querySelector(".wa-cta__close").addEventListener("click", e => { e.preventDefault(); e.stopPropagation(); closeCta(); });
-    cta.querySelector(".wa-cta__link").addEventListener("click", ctaMark);
-    setTimeout(() => cta.classList.add("show"), 9000);
-    setTimeout(() => { if (cta.classList.contains("show")) closeCta(); }, 30000);
-  }
+  /* Hinweis: Die frühere WhatsApp-CTA-Blase („Dein Adria-Traum wartet") wurde
+     bewusst entfernt — ungefragte Popups passen nicht zur ruhigen Luxus-Linie.
+     Der dezente WhatsApp-Float unten rechts bleibt. */
 
   /* ---------- Foto-Platzhalter: echte Bilder erkennen ---------- */
   document.querySelectorAll(".photo").forEach(p => {
