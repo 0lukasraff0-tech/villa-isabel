@@ -1,42 +1,31 @@
 /* =========================================================
-   Villa Isabel — Buchungs-Modal mit visuellem Kalender
-   Öffnet sich zentriert beim Klick auf einen [data-book]-Button
-   (z. B. „Terra anfragen"). Schließen per X, Overlay-Klick oder Esc.
+   Villa Isabel — Buchungs-Kalender
+   1) Modal: öffnet sich zentriert über [data-book]-Buttons
+   2) Kontaktformular: Kalenderblatt statt Datumsfelder
    „Anfragen" öffnet eine vorausgefüllte WhatsApp-Nachricht.
-   Platzhalter bis zum echten Channel-Manager-Widget.
+   Mindestaufenthalt: 3 Nächte.
    ========================================================= */
 (function () {
   var MONATE = ["Januar", "Februar", "März", "April", "Mai", "Juni",
     "Juli", "August", "September", "Oktober", "November", "Dezember"];
   var DOW = ["Mo", "Di", "Mi", "Do", "Fr", "Sa", "So"];
+  var MIN_NAECHTE = 3;
 
   function fmt(d) {
     return ("0" + d.getDate()).slice(-2) + "." + ("0" + (d.getMonth() + 1)).slice(-2) + "." + d.getFullYear();
   }
   function sameDay(a, b) { return a && b && a.toDateString() === b.toDateString(); }
 
-  var MIN_NAECHTE = 3;
-
-  function initCalendar(card) {
+  /* Wiederverwendbarer Kalender: root braucht .cal__grid, .cal__title,
+     .cal__prev, .cal__next. onChange(start, end, naechte) bei jeder Auswahl. */
+  function createCalendar(root, onChange) {
     var view = new Date(); view.setDate(1); view.setHours(0, 0, 0, 0);
     var start = null, end = null;
-    var grid = card.querySelector(".cal__grid");
-    var titleEl = card.querySelector(".cal__title");
-    var rangeEl = card.querySelector(".booking-card__range");
-    var submitEl = card.querySelector(".booking-card__submit");
+    var grid = root.querySelector(".cal__grid");
+    var titleEl = root.querySelector(".cal__title");
 
     function nights() {
       return (start && end) ? Math.round((end - start) / 86400000) : 0;
-    }
-
-    function updateRange() {
-      var n = nights();
-      var ok = n >= MIN_NAECHTE;
-      if (start && end && ok) rangeEl.textContent = fmt(start) + " – " + fmt(end) + " · " + n + " Nächte";
-      else if (start && end) rangeEl.textContent = fmt(start) + " – " + fmt(end) + " · Mindestaufenthalt " + MIN_NAECHTE + " Nächte";
-      else if (start) rangeEl.textContent = "Anreise " + fmt(start) + " · jetzt Abreise wählen";
-      else rangeEl.textContent = "Zeitraum wählen · ab " + MIN_NAECHTE + " Nächten";
-      submitEl.disabled = !ok;
     }
 
     function render() {
@@ -65,37 +54,26 @@
             if (!start || (start && end)) { start = dt; end = null; }
             else if (dt > start) { end = dt; }
             else { start = dt; end = null; }
-            updateRange(); render();
+            onChange(start, end, nights()); render();
           });
         })(date);
         grid.appendChild(btn);
       }
     }
 
-    card.querySelector(".cal__prev").addEventListener("click", function () {
+    root.querySelector(".cal__prev").addEventListener("click", function () {
       view.setMonth(view.getMonth() - 1); render();
     });
-    card.querySelector(".cal__next").addEventListener("click", function () {
+    root.querySelector(".cal__next").addEventListener("click", function () {
       view.setMonth(view.getMonth() + 1); render();
     });
-    submitEl.addEventListener("click", function () {
-      if (nights() < MIN_NAECHTE) return;
-      var apt = card.getAttribute("data-apartment") || "";
-      var wa = card.getAttribute("data-whatsapp") || "";
-      var guests = card.querySelector(".booking-card__guests select").value;
-      var wofuer = apt ? ("Apartment " + apt) : "die Villa Isabel";
-      var text = "Hi! Ich interessiere mich für " + wofuer + ":\n\n" +
-        "• Anreise: " + fmt(start) + "\n" +
-        "• Abreise: " + fmt(end) + " (" + nights() + " Nächte)\n" +
-        "• Gäste: " + guests + "\n\n" +
-        "Ist der Zeitraum frei?";
-      window.open("https://wa.me/" + wa + "?text=" + encodeURIComponent(text), "_blank", "noopener");
-    });
 
-    updateRange(); render();
+    render();
+    onChange(start, end, 0);
+    return { getStart: function () { return start; }, getEnd: function () { return end; }, getNights: nights };
   }
 
-  /* Modal-Markup einmalig erzeugen (falls nicht schon im HTML vorhanden) */
+  /* ---------- 1) Buchungs-Modal ---------- */
   function ensureModal() {
     var existing = document.getElementById("booking-modal");
     if (existing) return existing;
@@ -131,12 +109,36 @@
     return wrap;
   }
 
-  document.addEventListener("DOMContentLoaded", function () {
+  function initModal() {
     if (!document.querySelector("[data-book]")) return;
     var modal = ensureModal();
     var card = modal.querySelector(".booking-card");
     var heading = card.querySelector("h3");
-    initCalendar(card);
+    var rangeEl = card.querySelector(".booking-card__range");
+    var submitEl = card.querySelector(".booking-card__submit");
+
+    var cal = createCalendar(card, function (start, end, n) {
+      var ok = n >= MIN_NAECHTE;
+      if (start && end && ok) rangeEl.textContent = fmt(start) + " – " + fmt(end) + " · " + n + " Nächte";
+      else if (start && end) rangeEl.textContent = fmt(start) + " – " + fmt(end) + " · Mindestaufenthalt " + MIN_NAECHTE + " Nächte";
+      else if (start) rangeEl.textContent = "Anreise " + fmt(start) + " · jetzt Abreise wählen";
+      else rangeEl.textContent = "Zeitraum wählen · ab " + MIN_NAECHTE + " Nächten";
+      submitEl.disabled = !ok;
+    });
+
+    submitEl.addEventListener("click", function () {
+      if (cal.getNights() < MIN_NAECHTE) return;
+      var apt = card.getAttribute("data-apartment") || "";
+      var wa = card.getAttribute("data-whatsapp") || "";
+      var guests = card.querySelector(".booking-card__guests select").value;
+      var wofuer = apt ? ("Apartment " + apt) : "die Villa Isabel";
+      var text = "Hi! Ich interessiere mich für " + wofuer + ":\n\n" +
+        "• Anreise: " + fmt(cal.getStart()) + "\n" +
+        "• Abreise: " + fmt(cal.getEnd()) + " (" + cal.getNights() + " Nächte)\n" +
+        "• Gäste: " + guests + "\n\n" +
+        "Ist der Zeitraum frei?";
+      window.open("https://wa.me/" + wa + "?text=" + encodeURIComponent(text), "_blank", "noopener");
+    });
 
     function open(apt) {
       card.setAttribute("data-apartment", apt || "");
@@ -158,5 +160,51 @@
     document.addEventListener("keydown", function (e) {
       if (e.key === "Escape" && !modal.hidden) close();
     });
+  }
+
+  /* ---------- 2) Kontaktformular: Kalenderblatt + Apartment-Chips ---------- */
+  function initForm() {
+    var form = document.getElementById("anfrage-form");
+    if (!form) return;
+    var calRoot = form.querySelector(".form-cal");
+
+    if (calRoot) {
+      var inA = form.querySelector('input[name="anreise"]');
+      var inB = form.querySelector('input[name="abreise"]');
+      var rangeEl = calRoot.querySelector(".form-cal__range");
+      var submitBtn = form.querySelector('button[type="submit"]');
+
+      createCalendar(calRoot, function (start, end, n) {
+        inA.value = start ? fmt(start) : "";
+        inB.value = end ? fmt(end) : "";
+        var invalid = !!start && (!end || n < MIN_NAECHTE);
+        if (start && end && n >= MIN_NAECHTE) rangeEl.textContent = fmt(start) + " – " + fmt(end) + " · " + n + " Nächte";
+        else if (start && end) rangeEl.textContent = "Mindestaufenthalt " + MIN_NAECHTE + " Nächte";
+        else if (start) rangeEl.textContent = "Anreise " + fmt(start) + " · jetzt Abreise wählen";
+        else rangeEl.textContent = "Zeitraum wählen · ab " + MIN_NAECHTE + " Nächten";
+        /* Ohne Auswahl darf man senden (allgemeine Anfrage); eine angefangene
+           oder zu kurze Auswahl blockiert, bis sie gültig ist. */
+        submitBtn.disabled = invalid;
+      });
+    }
+
+    var chipWrap = form.querySelector(".apt-chips");
+    if (chipWrap) {
+      var hidden = form.querySelector('input[name="apartment"]');
+      Array.prototype.forEach.call(chipWrap.querySelectorAll(".apt-chip"), function (chip) {
+        chip.addEventListener("click", function () {
+          var wasActive = chip.classList.contains("active");
+          Array.prototype.forEach.call(chipWrap.querySelectorAll(".apt-chip"), function (c) { c.classList.remove("active"); });
+          if (wasActive) { hidden.value = ""; return; }
+          chip.classList.add("active");
+          hidden.value = chip.getAttribute("data-value");
+        });
+      });
+    }
+  }
+
+  document.addEventListener("DOMContentLoaded", function () {
+    initModal();
+    initForm();
   });
 })();

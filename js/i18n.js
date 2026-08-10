@@ -31,6 +31,7 @@
     "Zeitraum wählen und unverbindlich anfragen — wir antworten meist in Minuten.": { en: "Select your dates and enquire without obligation — we usually reply within minutes.", hr: "Odaberite razdoblje i pošaljite neobvezujući upit — obično odgovaramo u nekoliko minuta." },
     "Am besten direkt bei uns — persönlicher Kontakt, flexibel und ohne Plattformgebühren.": { en: "Best booked directly with us — personal contact, flexible, no platform fees.", hr: "Najbolje izravno kod nas — osobni kontakt, fleksibilno i bez naknada platformi." },
     "Du findest uns auch auf": { en: "You can also find us on", hr: "Pronađite nas i na" },
+    "Gesamte Villa": { en: "Entire villa", hr: "Cijela vila" },
     "Beim Laden der Karte werden Daten an Google übertragen.": { en: "Loading the map transfers data to Google.", hr: "Učitavanjem karte podaci se prenose Googleu." },
     "Drei Apartments, ein Gemeinschaftspool und der Charme der kroatischen Riviera — bei Opatija an der Kvarner Bucht.": { en: "Three apartments, a shared pool and the charm of the Croatian Riviera — near Opatija on the Kvarner Bay.", hr: "Tri apartmana, zajednički bazen i šarm hrvatske rivijere — kraj Opatije na Kvarnerskom zaljevu." },
     "© 2026 Villa Isabel · Matulji, Kroatien": { en: "© 2026 Villa Isabel · Matulji, Croatia", hr: "© 2026 Villa Isabel · Matulji, Hrvatska" },

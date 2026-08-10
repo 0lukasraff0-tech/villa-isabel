@@ -102,39 +102,48 @@
         <form id="anfrage-form" name="anfrage" method="POST" data-netlify="true" netlify-honeypot="bot-field" data-channel="whatsapp">
           <input type="hidden" name="form-name" value="anfrage" />
           <p style="display:none"><label>Bitte leer lassen: <input name="bot-field" /></label></p>
-          <div class="form-row">
-            <div class="field">
-              <label for="name">Name *</label>
-              <input type="text" id="name" name="name" required placeholder="Dein Name" />
+          <input type="hidden" name="anreise" value="" />
+          <input type="hidden" name="abreise" value="" />
+          <div class="form-duo">
+            <div class="form-cal">
+              <div class="cal__head">
+                <span class="cal__title">Monat</span>
+                <span class="cal__nav">
+                  <button type="button" class="cal__prev" aria-label="Vorheriger Monat">‹</button>
+                  <button type="button" class="cal__next" aria-label="Nächster Monat">›</button>
+                </span>
+              </div>
+              <div class="cal__grid"></div>
+              <p class="form-cal__range">Zeitraum wählen</p>
             </div>
-            <div class="field">
-              <label for="apartment">Apartment</label>
-              <select id="apartment" name="apartment">
-                <option>Egal / Beratung erwünscht</option>
-                <option>Sophia (2 Schlafzimmer, bis 4 Gäste)</option>
-                <option>Terra (3 Schlafzimmer, bis 6 Gäste)</option>
-                <option>Azure (3 Schlafzimmer, bis 6 Gäste)</option>
-                <option>Gesamte Villa (bis 16 Gäste)</option>
-              </select>
+            <div class="form-fields">
+              <div class="field">
+                <label for="name">Name *</label>
+                <input type="text" id="name" name="name" required placeholder="Dein Name" />
+              </div>
+              <div class="field">
+                <label>Apartment</label>
+                <input type="hidden" name="apartment" value="" />
+                <div class="apt-chips">
+                  <button type="button" class="apt-chip" data-value="Sophia">Sophia</button>
+                  <button type="button" class="apt-chip" data-value="Terra">Terra</button>
+                  <button type="button" class="apt-chip" data-value="Azure">Azure</button>
+                  <button type="button" class="apt-chip" data-value="Gesamte Villa">Gesamte Villa</button>
+                </div>
+              </div>
+              <div class="field" style="max-width:170px">
+                <label for="gaeste">Anzahl Gäste</label>
+                <select id="gaeste" name="gaeste">
+                  <option>1</option><option selected>2</option><option>3</option><option>4</option>
+                  <option>5</option><option>6</option><option>7</option><option>8</option>
+                  <option>10</option><option>12</option><option>14</option><option>16</option>
+                </select>
+              </div>
+              <div class="field">
+                <label for="nachricht">Nachricht</label>
+                <textarea id="nachricht" name="nachricht" placeholder="Besondere Wünsche, Fragen zur Anreise, Haustiere …"></textarea>
+              </div>
             </div>
-          </div>
-          <div class="form-row">
-            <div class="field">
-              <label for="anreise">Anreise</label>
-              <input type="date" id="anreise" name="anreise" />
-            </div>
-            <div class="field">
-              <label for="abreise">Abreise</label>
-              <input type="date" id="abreise" name="abreise" />
-            </div>
-          </div>
-          <div class="field" style="max-width:50%">
-            <label for="gaeste">Anzahl Gäste</label>
-            <input type="number" id="gaeste" name="gaeste" min="1" max="16" placeholder="z. B. 4" />
-          </div>
-          <div class="field">
-            <label for="nachricht">Nachricht</label>
-            <textarea id="nachricht" name="nachricht" placeholder="Besondere Wünsche, Fragen zur Anreise, Haustiere …"></textarea>
           </div>
           <button type="submit" class="btn btn--wa btn--block">Anfrage über WhatsApp senden</button>
           <p class="form-note">* Pflichtfeld. Es werden keine Daten gespeichert — die Anfrage wird direkt an die Vermieterin übermittelt.</p>

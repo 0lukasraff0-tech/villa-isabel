@@ -615,6 +615,29 @@ h1, h2, h3 { font-family: var(--font-head); font-weight: 600; line-height: 1.1; 
 .modal__x:hover { background: #e6ddd0; }
 @keyframes modalPop { from { opacity: 0; transform: translateY(8px) scale(0.98); } to { opacity: 1; transform: none; } }
 
+/* Kontaktformular: Kalenderblatt + Apartment-Chips */
+.form-duo { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; margin-bottom: 22px; }
+.form-cal {
+  border: 1px solid var(--c-line); border-radius: 16px; padding: 20px 20px 12px;
+  background: #fdfcfa; align-self: start;
+}
+.form-cal__range { font-size: 0.9rem; color: #55504a; margin: 10px 2px 6px; }
+.form-fields { display: flex; flex-direction: column; gap: 16px; }
+.form-fields .field { margin: 0; }
+.form-fields textarea { min-height: 112px; }
+.apt-chips { display: flex; flex-wrap: wrap; gap: 8px; }
+.apt-chip {
+  font: inherit; font-size: 0.9rem; padding: 8px 16px; border-radius: 999px;
+  border: 1px solid var(--c-line); background: #fff; color: #2b2622; cursor: pointer;
+  transition: background .15s ease, color .15s ease, border-color .15s ease;
+}
+.apt-chip:hover { border-color: var(--c-sea); }
+.apt-chip.active { background: var(--c-sea); border-color: var(--c-sea); color: #fff; }
+#anfrage-form button[type="submit"]:disabled { opacity: 0.45; cursor: default; pointer-events: none; }
+@media (max-width: 760px) {
+  .form-duo { grid-template-columns: 1fr; gap: 22px; }
+}
+
 /* Dezente Plattform-Fussnote (Kontaktkarte) */
 .platform-note { font-size: 0.82rem; color: #a49b90; margin-top: 14px; }
 .platform-note a { color: #7a7168; text-decoration: underline; text-underline-offset: 2px; }

@@ -98,8 +98,7 @@ document.addEventListener("DOMContentLoaded", () => {
       } catch (e2) {}
       const d = new FormData(form);
       const name     = (d.get("name") || "").trim();
-      let apt        = d.get("apartment") || "—";
-      if (/^Egal/.test(apt)) apt = "No preference";
+      const apt      = (d.get("apartment") || "").trim();
       const arrival  = d.get("anreise") || "—";
       const depart   = d.get("abreise") || "—";
       const guests   = d.get("gaeste") || "—";
@@ -107,8 +106,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
       const text =
 `Hi! My name is ${name || "a guest"} and I'm interested in staying at Villa Isabel. I'd love to check availability:
-
-• Apartment: ${apt}
+` +
+(apt ? `\n• Apartment: ${apt}` : ``) +
+`
 • Arrival: ${arrival}
 • Departure: ${depart}
 • Guests: ${guests}` +
