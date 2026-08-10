@@ -16,6 +16,24 @@
   }
   function sameDay(a, b) { return a && b && a.toDateString() === b.toDateString(); }
 
+  /* Maximale Gaestezahl je Auswahl: Sophia (2 SZ) 4, Terra/Azure (3 SZ) 6,
+     ganze Villa bzw. keine Auswahl 16. */
+  function maxGuests(apt) {
+    if (apt === "Sophia") return 4;
+    if (apt === "Terra" || apt === "Azure") return 6;
+    return 16;
+  }
+  function fillGuestSelect(select, max) {
+    var prev = parseInt(select.value, 10) || 2;
+    select.innerHTML = "";
+    for (var i = 1; i <= max; i++) {
+      var o = document.createElement("option");
+      o.textContent = i;
+      select.appendChild(o);
+    }
+    select.value = String(Math.min(prev, max));
+  }
+
   /* Wiederverwendbarer Kalender: root braucht .cal__grid, .cal__title,
      .cal__prev, .cal__next. onChange(start, end, naechte) bei jeder Auswahl. */
   function createCalendar(root, onChange) {
@@ -143,6 +161,7 @@
     function open(apt) {
       card.setAttribute("data-apartment", apt || "");
       heading.textContent = apt ? ("Apartment " + apt + " buchen") : "Verfügbarkeit anfragen";
+      fillGuestSelect(card.querySelector(".booking-card__guests select"), maxGuests(apt));
       modal.hidden = false;
       document.body.style.overflow = "hidden";
     }
@@ -191,13 +210,15 @@
     var chipWrap = form.querySelector(".apt-chips");
     if (chipWrap) {
       var hidden = form.querySelector('input[name="apartment"]');
+      var guestSel = form.querySelector('select[name="gaeste"]');
+      if (guestSel) fillGuestSelect(guestSel, maxGuests(hidden.value));
       Array.prototype.forEach.call(chipWrap.querySelectorAll(".apt-chip"), function (chip) {
         chip.addEventListener("click", function () {
           var wasActive = chip.classList.contains("active");
           Array.prototype.forEach.call(chipWrap.querySelectorAll(".apt-chip"), function (c) { c.classList.remove("active"); });
-          if (wasActive) { hidden.value = ""; return; }
-          chip.classList.add("active");
-          hidden.value = chip.getAttribute("data-value");
+          if (wasActive) { hidden.value = ""; }
+          else { chip.classList.add("active"); hidden.value = chip.getAttribute("data-value"); }
+          if (guestSel) fillGuestSelect(guestSel, maxGuests(hidden.value));
         });
       });
     }
