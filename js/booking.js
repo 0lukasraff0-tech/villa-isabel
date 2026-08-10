@@ -1,23 +1,62 @@
 /* =========================================================
-   Villa Isabel — Buchungs-Kalender
-   1) Modal: öffnet sich zentriert über [data-book]-Buttons
+   Villa Isabel — Buchungs-Kalender (dreisprachig DE/EN/HR)
+   1) Modal: öffnet sich zentriert über [data-book]-Buttons,
+      mit Apartment-Chips (Sophia/Terra/Azure/Gesamte Villa)
    2) Kontaktformular: Kalenderblatt statt Datumsfelder
-   „Anfragen" öffnet eine vorausgefüllte WhatsApp-Nachricht.
+   „Anfragen" öffnet eine vorausgefüllte WhatsApp-Nachricht
+   (immer Englisch — die Gastgeberin spricht EN/HR).
    Mindestaufenthalt: 3 Nächte.
    ========================================================= */
 (function () {
-  var MONATE = ["Januar", "Februar", "März", "April", "Mai", "Juni",
-    "Juli", "August", "September", "Oktober", "November", "Dezember"];
-  var DOW = ["Mo", "Di", "Mi", "Do", "Fr", "Sa", "So"];
   var MIN_NAECHTE = 3;
+  var WA_NUMMER = "385955555512";
+
+  var STR = {
+    de: {
+      months: ["Januar", "Februar", "März", "April", "Mai", "Juni", "Juli", "August", "September", "Oktober", "November", "Dezember"],
+      dow: ["Mo", "Di", "Mi", "Do", "Fr", "Sa", "So"],
+      avail: "Verfügbarkeit anfragen",
+      bookApt: function (a) { return a === "Gesamte Villa" ? "Gesamte Villa buchen" : "Apartment " + a + " buchen"; },
+      pick: "Zeitraum wählen · ab " + MIN_NAECHTE + " Nächten",
+      minStay: "Mindestaufenthalt " + MIN_NAECHTE + " Nächte",
+      arrival: function (d) { return "Anreise " + d + " · jetzt Abreise wählen"; },
+      nights: function (n) { return n + " Nächte"; }
+    },
+    en: {
+      months: ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"],
+      dow: ["Mo", "Tu", "We", "Th", "Fr", "Sa", "Su"],
+      avail: "Check availability",
+      bookApt: function (a) { return a === "Gesamte Villa" ? "Book the entire villa" : "Book Apartment " + a; },
+      pick: "Select dates · " + MIN_NAECHTE + " nights minimum",
+      minStay: "Minimum stay: " + MIN_NAECHTE + " nights",
+      arrival: function (d) { return "Arrival " + d + " · now select departure"; },
+      nights: function (n) { return n + " nights"; }
+    },
+    hr: {
+      months: ["Siječanj", "Veljača", "Ožujak", "Travanj", "Svibanj", "Lipanj", "Srpanj", "Kolovoz", "Rujan", "Listopad", "Studeni", "Prosinac"],
+      dow: ["Po", "Ut", "Sr", "Če", "Pe", "Su", "Ne"],
+      avail: "Provjeri dostupnost",
+      bookApt: function (a) { return a === "Gesamte Villa" ? "Rezerviraj cijelu vilu" : "Rezerviraj apartman " + a; },
+      pick: "Odaberite razdoblje · min. " + MIN_NAECHTE + " noćenja",
+      minStay: "Minimalni boravak: " + MIN_NAECHTE + " noćenja",
+      arrival: function (d) { return "Dolazak " + d + " · odaberite odlazak"; },
+      nights: function (n) { return n + " noćenja"; }
+    }
+  };
+
+  function lang() {
+    try { var s = localStorage.getItem("villaLang"); if (s && STR[s]) return s; } catch (e) {}
+    var l = (document.documentElement.lang || navigator.language || "en").slice(0, 2).toLowerCase();
+    return STR[l] ? l : "en";
+  }
+  function T() { return STR[lang()]; }
 
   function fmt(d) {
     return ("0" + d.getDate()).slice(-2) + "." + ("0" + (d.getMonth() + 1)).slice(-2) + "." + d.getFullYear();
   }
   function sameDay(a, b) { return a && b && a.toDateString() === b.toDateString(); }
 
-  /* Maximale Gaestezahl je Auswahl: Sophia (2 SZ) 4, Terra/Azure (3 SZ) 6,
-     ganze Villa bzw. keine Auswahl 16. */
+  /* Maximale Gaestezahl: Sophia (2 SZ) 4, Terra/Azure (3 SZ) 6, Villa/offen 16. */
   function maxGuests(apt) {
     if (apt === "Sophia") return 4;
     if (apt === "Terra" || apt === "Azure") return 6;
@@ -34,8 +73,8 @@
     select.value = String(Math.min(prev, max));
   }
 
-  /* Wiederverwendbarer Kalender: root braucht .cal__grid, .cal__title,
-     .cal__prev, .cal__next. onChange(start, end, naechte) bei jeder Auswahl. */
+  /* Wiederverwendbarer Kalender; onChange(start, end, naechte) bei Auswahl. */
+  var alleKalender = [];
   function createCalendar(root, onChange) {
     var view = new Date(); view.setDate(1); view.setHours(0, 0, 0, 0);
     var start = null, end = null;
@@ -47,9 +86,10 @@
     }
 
     function render() {
-      titleEl.textContent = MONATE[view.getMonth()] + " " + view.getFullYear();
+      var t = T();
+      titleEl.textContent = t.months[view.getMonth()] + " " + view.getFullYear();
       grid.innerHTML = "";
-      DOW.forEach(function (d) {
+      t.dow.forEach(function (d) {
         var el = document.createElement("div"); el.className = "cal__dow"; el.textContent = d; grid.appendChild(el);
       });
       var startDow = (view.getDay() + 6) % 7;
@@ -88,7 +128,14 @@
 
     render();
     onChange(start, end, 0);
-    return { getStart: function () { return start; }, getEnd: function () { return end; }, getNights: nights };
+    var api = {
+      getStart: function () { return start; },
+      getEnd: function () { return end; },
+      getNights: nights,
+      refresh: function () { render(); onChange(start, end, nights()); }
+    };
+    alleKalender.push(api);
+    return api;
   }
 
   /* ---------- 1) Buchungs-Modal ---------- */
@@ -101,10 +148,16 @@
       '<div class="modal__overlay" data-close></div>' +
       '<div class="modal__dialog" role="dialog" aria-modal="true" aria-label="Verfügbarkeit anfragen">' +
       '  <button class="modal__x" type="button" data-close aria-label="Schließen">×</button>' +
-      '  <div class="booking-card" data-apartment="" data-whatsapp="385955555512">' +
+      '  <div class="booking-card" data-apartment="">' +
       '    <p class="eyebrow">Verfügbarkeit</p>' +
       '    <h3>Verfügbarkeit anfragen</h3>' +
       '    <p class="booking-card__sub">Zeitraum wählen und unverbindlich anfragen — wir antworten meist in Minuten.</p>' +
+      '    <div class="apt-chips">' +
+      '      <button type="button" class="apt-chip" data-value="Sophia">Sophia</button>' +
+      '      <button type="button" class="apt-chip" data-value="Terra">Terra</button>' +
+      '      <button type="button" class="apt-chip" data-value="Azure">Azure</button>' +
+      '      <button type="button" class="apt-chip" data-value="Gesamte Villa">Gesamte Villa</button>' +
+      '    </div>' +
       '    <div class="cal__head">' +
       '      <span class="cal__title">Monat</span>' +
       '      <span class="cal__nav">' +
@@ -134,34 +187,53 @@
     var heading = card.querySelector("h3");
     var rangeEl = card.querySelector(".booking-card__range");
     var submitEl = card.querySelector(".booking-card__submit");
+    var guestSel = card.querySelector(".booking-card__guests select");
+    var chips = card.querySelectorAll(".apt-chip");
+
+    function setHeading() {
+      var apt = card.getAttribute("data-apartment");
+      heading.textContent = apt ? T().bookApt(apt) : T().avail;
+    }
+    function setApartment(apt) {
+      card.setAttribute("data-apartment", apt || "");
+      Array.prototype.forEach.call(chips, function (c) {
+        c.classList.toggle("active", c.getAttribute("data-value") === apt);
+      });
+      fillGuestSelect(guestSel, maxGuests(apt));
+      setHeading();
+    }
+    Array.prototype.forEach.call(chips, function (chip) {
+      chip.addEventListener("click", function () {
+        var val = chip.getAttribute("data-value");
+        setApartment(card.getAttribute("data-apartment") === val ? "" : val);
+      });
+    });
 
     var cal = createCalendar(card, function (start, end, n) {
+      var t = T();
       var ok = n >= MIN_NAECHTE;
-      if (start && end && ok) rangeEl.textContent = fmt(start) + " – " + fmt(end) + " · " + n + " Nächte";
-      else if (start && end) rangeEl.textContent = fmt(start) + " – " + fmt(end) + " · Mindestaufenthalt " + MIN_NAECHTE + " Nächte";
-      else if (start) rangeEl.textContent = "Anreise " + fmt(start) + " · jetzt Abreise wählen";
-      else rangeEl.textContent = "Zeitraum wählen · ab " + MIN_NAECHTE + " Nächten";
+      if (start && end && ok) rangeEl.textContent = fmt(start) + " – " + fmt(end) + " · " + t.nights(n);
+      else if (start && end) rangeEl.textContent = fmt(start) + " – " + fmt(end) + " · " + t.minStay;
+      else if (start) rangeEl.textContent = t.arrival(fmt(start));
+      else rangeEl.textContent = t.pick;
       submitEl.disabled = !ok;
     });
 
     submitEl.addEventListener("click", function () {
       if (cal.getNights() < MIN_NAECHTE) return;
       var apt = card.getAttribute("data-apartment") || "";
-      var wa = card.getAttribute("data-whatsapp") || "";
-      var guests = card.querySelector(".booking-card__guests select").value;
-      var wofuer = apt ? ("Apartment " + apt) : "die Villa Isabel";
-      var text = "Hi! Ich interessiere mich für " + wofuer + ":\n\n" +
-        "• Anreise: " + fmt(cal.getStart()) + "\n" +
-        "• Abreise: " + fmt(cal.getEnd()) + " (" + cal.getNights() + " Nächte)\n" +
-        "• Gäste: " + guests + "\n\n" +
-        "Ist der Zeitraum frei?";
-      window.open("https://wa.me/" + wa + "?text=" + encodeURIComponent(text), "_blank", "noopener");
+      var wofuer = apt === "Gesamte Villa" ? "the entire Villa Isabel" : apt ? ("Apartment " + apt) : "Villa Isabel";
+      var text = "Hi! I'm interested in staying at " + wofuer + ":\n\n" +
+        "• Arrival: " + fmt(cal.getStart()) + "\n" +
+        "• Departure: " + fmt(cal.getEnd()) + " (" + cal.getNights() + " nights)\n" +
+        "• Guests: " + guestSel.value + "\n\n" +
+        "Is this period available? Thank you!";
+      window.open("https://wa.me/" + WA_NUMMER + "?text=" + encodeURIComponent(text), "_blank", "noopener");
     });
 
     function open(apt) {
-      card.setAttribute("data-apartment", apt || "");
-      heading.textContent = apt ? ("Apartment " + apt + " buchen") : "Verfügbarkeit anfragen";
-      fillGuestSelect(card.querySelector(".booking-card__guests select"), maxGuests(apt));
+      setApartment(apt || "");
+      cal.refresh();
       modal.hidden = false;
       document.body.style.overflow = "hidden";
     }
@@ -179,9 +251,15 @@
     document.addEventListener("keydown", function (e) {
       if (e.key === "Escape" && !modal.hidden) close();
     });
+
+    /* Sprachwechsel: Kopfzeile des Modals live nachziehen */
+    document.addEventListener("click", function (e) {
+      var b = e.target && e.target.closest ? e.target.closest(".lang-switch button") : null;
+      if (b) setTimeout(setHeading, 0);
+    });
   }
 
-  /* ---------- 2) Kontaktformular: Kalenderblatt + Apartment-Chips ---------- */
+  /* ---------- 2) Kontaktformular ---------- */
   function initForm() {
     var form = document.getElementById("anfrage-form");
     if (!form) return;
@@ -194,15 +272,14 @@
       var submitBtn = form.querySelector('button[type="submit"]');
 
       createCalendar(calRoot, function (start, end, n) {
+        var t = T();
         inA.value = start ? fmt(start) : "";
         inB.value = end ? fmt(end) : "";
         var invalid = !!start && (!end || n < MIN_NAECHTE);
-        if (start && end && n >= MIN_NAECHTE) rangeEl.textContent = fmt(start) + " – " + fmt(end) + " · " + n + " Nächte";
-        else if (start && end) rangeEl.textContent = "Mindestaufenthalt " + MIN_NAECHTE + " Nächte";
-        else if (start) rangeEl.textContent = "Anreise " + fmt(start) + " · jetzt Abreise wählen";
-        else rangeEl.textContent = "Zeitraum wählen · ab " + MIN_NAECHTE + " Nächten";
-        /* Ohne Auswahl darf man senden (allgemeine Anfrage); eine angefangene
-           oder zu kurze Auswahl blockiert, bis sie gültig ist. */
+        if (start && end && n >= MIN_NAECHTE) rangeEl.textContent = fmt(start) + " – " + fmt(end) + " · " + t.nights(n);
+        else if (start && end) rangeEl.textContent = t.minStay;
+        else if (start) rangeEl.textContent = t.arrival(fmt(start));
+        else rangeEl.textContent = t.pick;
         submitBtn.disabled = invalid;
       });
     }
@@ -227,5 +304,10 @@
   document.addEventListener("DOMContentLoaded", function () {
     initModal();
     initForm();
+    /* Sprachwechsel: alle Kalender (Monat, Wochentage, Hinweistexte) neu zeichnen */
+    document.addEventListener("click", function (e) {
+      var b = e.target && e.target.closest ? e.target.closest(".lang-switch button") : null;
+      if (b) setTimeout(function () { alleKalender.forEach(function (c) { c.refresh(); }); }, 0);
+    });
   });
 })();

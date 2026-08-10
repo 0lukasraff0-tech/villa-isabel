@@ -641,6 +641,8 @@ h1, h2, h3 { font-family: var(--font-head); font-weight: 600; line-height: 1.1; 
 }
 .apt-chip:hover { border-color: var(--c-sea); }
 .apt-chip.active { background: var(--c-sea); border-color: var(--c-sea); color: #fff; }
+.booking-card .apt-chips { margin: 0 0 16px; }
+.booking-card .apt-chip { font-size: 0.85rem; padding: 7px 14px; }
 #anfrage-form button[type="submit"]:disabled { opacity: 0.45; cursor: default; pointer-events: none; }
 @media (max-width: 760px) {
   .form-duo { grid-template-columns: 1fr; gap: 22px; }
