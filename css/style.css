@@ -594,6 +594,7 @@ h1, h2, h3 { font-family: var(--font-head); font-weight: 600; line-height: 1.1; 
 .booking-card__guests label { font-size: 0.66rem; text-transform: uppercase; letter-spacing: 0.08em; color: #7a7168; margin: 0 0 4px 2px; }
 .booking-card__guests select { border: 1px solid var(--c-line); border-radius: 10px; padding: 9px 12px; font: inherit; background: #fff; cursor: pointer; }
 .booking-card__submit { width: 100%; margin-top: 18px; }
+.booking-card__submit:disabled { opacity: 0.45; cursor: default; pointer-events: none; }
 
 /* Buchungs-Modal (zentriertes Fenster mit Overlay) */
 .modal[hidden] { display: none; }

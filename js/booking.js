@@ -15,17 +15,28 @@
   }
   function sameDay(a, b) { return a && b && a.toDateString() === b.toDateString(); }
 
+  var MIN_NAECHTE = 3;
+
   function initCalendar(card) {
     var view = new Date(); view.setDate(1); view.setHours(0, 0, 0, 0);
     var start = null, end = null;
     var grid = card.querySelector(".cal__grid");
     var titleEl = card.querySelector(".cal__title");
     var rangeEl = card.querySelector(".booking-card__range");
+    var submitEl = card.querySelector(".booking-card__submit");
+
+    function nights() {
+      return (start && end) ? Math.round((end - start) / 86400000) : 0;
+    }
 
     function updateRange() {
-      if (start && end) rangeEl.textContent = fmt(start) + " – " + fmt(end);
+      var n = nights();
+      var ok = n >= MIN_NAECHTE;
+      if (start && end && ok) rangeEl.textContent = fmt(start) + " – " + fmt(end) + " · " + n + " Nächte";
+      else if (start && end) rangeEl.textContent = fmt(start) + " – " + fmt(end) + " · Mindestaufenthalt " + MIN_NAECHTE + " Nächte";
       else if (start) rangeEl.textContent = "Anreise " + fmt(start) + " · jetzt Abreise wählen";
-      else rangeEl.textContent = "Zeitraum wählen";
+      else rangeEl.textContent = "Zeitraum wählen · ab " + MIN_NAECHTE + " Nächten";
+      submitEl.disabled = !ok;
     }
 
     function render() {
@@ -67,14 +78,15 @@
     card.querySelector(".cal__next").addEventListener("click", function () {
       view.setMonth(view.getMonth() + 1); render();
     });
-    card.querySelector(".booking-card__submit").addEventListener("click", function () {
+    submitEl.addEventListener("click", function () {
+      if (nights() < MIN_NAECHTE) return;
       var apt = card.getAttribute("data-apartment") || "";
       var wa = card.getAttribute("data-whatsapp") || "";
       var guests = card.querySelector(".booking-card__guests select").value;
       var wofuer = apt ? ("Apartment " + apt) : "die Villa Isabel";
       var text = "Hi! Ich interessiere mich für " + wofuer + ":\n\n" +
-        "• Anreise: " + (start ? fmt(start) : "—") + "\n" +
-        "• Abreise: " + (end ? fmt(end) : "—") + "\n" +
+        "• Anreise: " + fmt(start) + "\n" +
+        "• Abreise: " + fmt(end) + " (" + nights() + " Nächte)\n" +
         "• Gäste: " + guests + "\n\n" +
         "Ist der Zeitraum frei?";
       window.open("https://wa.me/" + wa + "?text=" + encodeURIComponent(text), "_blank", "noopener");
