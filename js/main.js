@@ -77,6 +77,15 @@ document.addEventListener("DOMContentLoaded", () => {
      bewusst entfernt — ungefragte Popups passen nicht zur ruhigen Luxus-Linie.
      Der dezente WhatsApp-Float unten rechts bleibt. */
 
+  /* ---------- Hero-Video: sanft einblenden, sobald es laeuft ---------- */
+  const heroVid = document.querySelector(".hero__video video");
+  if (heroVid) {
+    heroVid.preload = "auto";
+    const anzeigen = () => heroVid.parentElement.classList.add("is-on");
+    heroVid.addEventListener("playing", anzeigen);
+    if (!heroVid.paused && heroVid.currentTime > 0) anzeigen();
+  }
+
   /* ---------- Foto-Platzhalter: echte Bilder erkennen ---------- */
   document.querySelectorAll(".photo").forEach(p => {
     const bg = p.style.backgroundImage;
