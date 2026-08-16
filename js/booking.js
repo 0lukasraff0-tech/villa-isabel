@@ -153,9 +153,9 @@
       '    <h3>Verfügbarkeit anfragen</h3>' +
       '    <p class="booking-card__sub">Zeitraum wählen und unverbindlich anfragen — wir antworten meist in Minuten.</p>' +
       '    <div class="apt-chips">' +
-      '      <button type="button" class="apt-chip" data-value="Sophia">Sophia</button>' +
       '      <button type="button" class="apt-chip" data-value="Terra">Terra</button>' +
       '      <button type="button" class="apt-chip" data-value="Azure">Azure</button>' +
+      '      <button type="button" class="apt-chip" data-value="Sophia">Sophia</button>' +
       '      <button type="button" class="apt-chip" data-value="Gesamte Villa">Gesamte Villa</button>' +
       '    </div>' +
       '    <div class="cal__head">' +
