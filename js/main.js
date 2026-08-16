@@ -252,4 +252,18 @@ Ist in diesem Zeitraum etwas frei?`;
   document.querySelectorAll(".nav-links a").forEach(a => {
     if (a.getAttribute("href") === here) a.classList.add("active");
   });
+
+  /* ---------- Anfrage-Anker: Karte mittig, gleichmäßige Fläche oben/unten ---------- */
+  function centerAnfrage() {
+    if (location.hash !== "#anfrage") return;
+    const card = document.getElementById("anfrage");
+    if (!card) return;
+    const header = document.querySelector(".site-header");
+    const hh = header ? header.offsetHeight : 0;
+    const rect = card.getBoundingClientRect();
+    const gap = Math.max((window.innerHeight - hh - rect.height) / 2, 28);
+    window.scrollTo({ top: rect.top + window.scrollY - hh - gap, behavior: "auto" });
+  }
+  window.addEventListener("load", centerAnfrage);
+  window.addEventListener("hashchange", centerAnfrage);
 });
