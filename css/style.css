@@ -108,6 +108,12 @@ h1, h2, h3 { font-family: var(--font-head); font-weight: 600; line-height: 1.1; 
   display: grid; place-items: center; color: #fff; font-size: 0.95rem;
 }
 .brand small { display: block; font-family: var(--font-body); font-size: 0.6rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--c-muted); margin-top: -4px; white-space: nowrap; }
+/* Echtes Markenlogo (SVG-Wordmark) im Header und Footer */
+.brand-logo { height: 36px; width: auto; display: block; margin-right: 18px; }
+.brand-logo--footer { height: 34px; }
+@media (max-width: 620px) {
+  .brand-logo { height: 30px; margin-right: 0; }
+}
 
 .nav-links { display: flex; align-items: center; gap: 22px; list-style: none; }
 .nav-links a { font-size: 0.92rem; font-weight: 500; color: var(--c-ink); position: relative; padding: 4px 0; white-space: nowrap; }

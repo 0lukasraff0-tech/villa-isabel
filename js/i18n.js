@@ -32,6 +32,7 @@
     "Am besten direkt bei uns — persönlicher Kontakt, flexibel und ohne Plattformgebühren.": { en: "Best booked directly with us — personal contact, flexible, no platform fees.", hr: "Najbolje izravno kod nas — osobni kontakt, fleksibilno i bez naknada platformi." },
     "Du findest uns auch auf": { en: "You can also find us on", hr: "Pronađite nas i na" },
     "Gesamte Villa": { en: "Entire villa", hr: "Cijela vila" },
+    "Die Villa Isabel führen wir als Familie — genau wie unsere Apartments in Zagreb. Ich freue mich darauf, euch an der Kvarner Bucht begrüßen zu dürfen.": { en: "We run Villa Isabel as a family — just like our apartments in Zagreb. I look forward to welcoming you to the Kvarner Bay.", hr: "Villu Isabel vodimo kao obitelj — baš kao i naše apartmane u Zagrebu. Veselim se što ću vas ugostiti na Kvarneru." },
     "Beim Laden der Karte werden Daten an Google übertragen.": { en: "Loading the map transfers data to Google.", hr: "Učitavanjem karte podaci se prenose Googleu." },
     "Drei Apartments, ein Gemeinschaftspool und der Charme der kroatischen Riviera — bei Opatija an der Kvarner Bucht.": { en: "Three apartments, a shared pool and the charm of the Croatian Riviera — near Opatija on the Kvarner Bay.", hr: "Tri apartmana, zajednički bazen i šarm hrvatske rivijere — kraj Opatije na Kvarnerskom zaljevu." },
     "© 2026 Villa Isabel · Matulji, Kroatien": { en: "© 2026 Villa Isabel · Matulji, Croatia", hr: "© 2026 Villa Isabel · Matulji, Hrvatska" },
