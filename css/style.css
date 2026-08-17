@@ -368,6 +368,11 @@ h1, h2, h3 { font-family: var(--font-head); font-weight: 600; line-height: 1.1; 
 .room-block:first-of-type { margin-top: 40px; }
 .room-head { display: flex; align-items: baseline; gap: 12px; margin-bottom: 22px; }
 .room-head h2 { font-size: clamp(1.6rem, 3vw, 2.2rem); color: var(--c-sea); }
+.room-head .ensuite {
+  font-size: 0.72rem; font-weight: 600; color: var(--c-sea);
+  border: 1px solid var(--c-line); border-radius: 999px; padding: 3px 12px;
+  letter-spacing: 0.04em; white-space: nowrap;
+}
 .room-head .count { font-size: 0.82rem; color: var(--c-muted); letter-spacing: 0.04em; }
 
 /* Erstes Bild groß als „Featured", Rest im ruhigen Raster */
@@ -515,6 +520,21 @@ h1, h2, h3 { font-family: var(--font-head); font-weight: 600; line-height: 1.1; 
 .cta-band { text-align: center; }
 .cta-band h2 { font-size: clamp(2rem, 4vw, 3rem); margin-bottom: 16px; }
 .cta-band .hero__actions { margin-top: 28px; }
+
+/* ---------- Galerie-Überblick: strukturierte Gruppen ---------- */
+.g-group { margin-bottom: 40px; text-align: left; }
+.g-label {
+  font-family: var(--font-body); text-transform: uppercase; letter-spacing: 0.18em;
+  font-size: 0.72rem; font-weight: 600; color: var(--c-terra-d); margin-bottom: 12px;
+}
+.gallery-grid--trio { grid-template-columns: repeat(3, 1fr); }
+.gallery-grid .photo { position: relative; }
+.gallery-grid .photo .tag {
+  position: absolute; left: 12px; bottom: 10px; color: #fff;
+  font-size: 0.72rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase;
+  text-shadow: 0 1px 8px rgba(10,30,36,0.75);
+}
+@media (max-width: 700px) { .gallery-grid--trio { grid-template-columns: 1fr 1fr; } }
 
 /* ---------- FAQ (Kontaktseite) ---------- */
 .faq { max-width: 720px; margin: 8px auto 0; text-align: left; display: grid; gap: 12px; }
