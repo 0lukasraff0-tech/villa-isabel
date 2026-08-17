@@ -173,6 +173,7 @@
     "Sichere dir deine Wunschtermine": { en: "Secure your preferred dates", hr: "Osigurajte željene datume" },
     "Fotorundgang": { en: "Photo tour", hr: "Foto-obilazak" },
     "Video-Rundgang": { en: "Video tour", hr: "Video-obilazak" },
+    "Badezimmer": { en: "Bathrooms", hr: "Kupaonice" },
     "Häufige Fragen": { en: "Frequently asked", hr: "Česta pitanja" },
     "Kurz beantwortet": { en: "Quick answers", hr: "Kratki odgovori" },
     "Wie buche ich am besten?": { en: "What’s the best way to book?", hr: "Kako najbolje rezervirati?" },
