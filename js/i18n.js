@@ -48,7 +48,7 @@
     // ---- Highlights ----
     "Willkommen": { en: "Welcome", hr: "Dobrodošli" },
     "Alles unter einem Dach": { en: "Everything under one roof", hr: "Sve pod jednim krovom" },
-    "Drei stilvolle Apartments in einer Villa am Meer — ein ruhiger Rückzugsort zum Wohlfühlen, mit Pool und Blick über die Kvarner Bucht, und doch ganz nah an Opatija.": { en: "Three stylish apartments in one seaside villa — a calm retreat to feel at home, with a pool and views over the Kvarner Bay, yet just minutes from Opatija.", hr: "Tri elegantna apartmana u vili uz more — miran kutak za opuštanje, s bazenom i pogledom na Kvarnerski zaljev, a ipak nadomak Opatije." },
+    "Drei stilvolle Apartments in einer Villa am Meer: ein ruhiger Rückzugsort mit Pool und Blick über die Kvarner Bucht.": { en: "Three stylish apartments in one villa by the sea: a calm retreat with a pool and views over Kvarner Bay.", hr: "Tri elegantna apartmana u vili uz more: miran kutak s bazenom i pogledom na Kvarnerski zaljev." },
     "Gemeinschaftspool": { en: "Shared pool", hr: "Zajednički bazen" },
     "Großzügiger Pool mit Sonnenterrasse und Liegen — zum Entspannen mit Blick über die Bucht.": { en: "A generous pool with sun terrace and loungers — to relax with a view over the bay.", hr: "Prostran bazen sa sunčalištem i ležaljkama — za opuštanje uz pogled na zaljev." },
     "Grill & Outdoor-Lounge": { en: "Grill & outdoor lounge", hr: "Roštilj i vanjski salon" },
@@ -85,7 +85,7 @@
     // ---- Apartments-Vorschau ----
     "Wohnen": { en: "Stay", hr: "Smještaj" },
     "Drei Apartments, ein Zuhause": { en: "Three apartments, one home", hr: "Tri apartmana, jedan dom" },
-    "Jede Einheit hat ihren eigenen Charakter — wähle die passende für deinen Aufenthalt.": { en: "Each unit has its own character — choose the right one for your stay.", hr: "Svaka jedinica ima svoj karakter — odaberite onu pravu za svoj boravak." },
+    "Jede Einheit hat ihren eigenen Charakter. Wähle die passende für deinen Aufenthalt.": { en: "Each unit has its own character. Choose the one that suits your stay.", hr: "Svaka jedinica ima svoj karakter. Odaberite onu koja odgovara vašem boravku." },
     "2 Schlafzimmer": { en: "2 bedrooms", hr: "2 spavaće sobe" },
     "3 Schlafzimmer": { en: "3 bedrooms", hr: "3 spavaće sobe" },
     "4 Gäste": { en: "4 guests", hr: "4 gosta" },
@@ -106,7 +106,7 @@
     // ---- Gästestimmen ----
     "Gästestimmen": { en: "Guest voices", hr: "Dojmovi gostiju" },
     "Was Gäste erwartet": { en: "What guests can expect", hr: "Što gosti mogu očekivati" },
-    "Modern, ruhig, mit Meerblick aus jedem Zimmer — und eine Gastgeberin, die sich kümmert.": { en: "Modern, peaceful, with sea views from every room — and a host who cares.", hr: "Moderno, mirno, s pogledom na more iz svake sobe — i domaćica koja brine." },
+    "Modern, ruhig, mit Meerblick aus jedem Zimmer. Und eine Gastgeberin, die sich kümmert.": { en: "Modern, quiet, with a sea view from every room. And a host who truly cares.", hr: "Moderno, mirno, s pogledom na more iz svake sobe. I domaćica koja se brine." },
     "„Der Blick auf die Bucht aus jedem Zimmer ist unbeschreiblich — wir sind morgens nur wegen des Meeres aufgewacht. Alles blitzsauber und modern.“": { en: "“The view over the bay from every room is indescribable — we woke up early just for the sea. Everything spotless and modern.”", hr: "„Pogled na zaljev iz svake sobe je neopisiv — budili smo se rano samo zbog mora. Sve besprijekorno čisto i moderno.“" },
     "— Anna & Markus, Deutschland": { en: "— Anna & Markus, Germany", hr: "— Anna i Markus, Njemačka" },
     "„Ruhig, elegant und doch nur Minuten von Opatija. Pool und Terrasse am Abend waren unser absoluter Lieblingsplatz.“": { en: "“Quiet, elegant and yet just minutes from Opatija. The pool and terrace in the evening were our absolute favorite spot.”", hr: "„Mirno, elegantno, a ipak tek nekoliko minuta od Opatije. Bazen i terasa navečer bili su naše najdraže mjesto.“" },
@@ -167,7 +167,7 @@
 
     // ---- Galerie ----
     "Einblicke in die Villa Isabel": { en: "A look inside Villa Isabel", hr: "Pogled u Villu Isabel" },
-    "Ein erster Überblick — und für jedes Apartment gibt es einen kompletten Foto-Rundgang, nach Räumen sortiert.": { en: "A first overview — and for each apartment there's a full photo tour, sorted by room.", hr: "Prvi pregled — a za svaki apartman tu je potpuni foto-obilazak, razvrstan po prostorijama." },
+    "Ein erster Überblick. Der komplette Foto-Rundgang wartet in jedem Apartment, nach Räumen sortiert.": { en: "A first overview. The full photo tour awaits in each apartment, sorted by room.", hr: "Prvi pregled. Potpuni foto-obilazak čeka u svakom apartmanu, razvrstan po prostorijama." },
     "Überblick": { en: "Overview", hr: "Pregled" },
     "Gefällt dir, was du siehst?": { en: "Like what you see?", hr: "Sviđa vam se što vidite?" },
     "Sichere dir deine Wunschtermine": { en: "Secure your preferred dates", hr: "Osigurajte željene datume" },
@@ -217,7 +217,7 @@
 
     // ---- Lage & Umgebung ----
     "Mitten in der Kvarner Bucht": { en: "In the heart of the Kvarner Bay", hr: "U srcu Kvarnerskog zaljeva" },
-    "Zwischen den Bergen des Učka und dem türkisen Wasser der Adria — die Villa Isabel liegt ideal, um die kroatische Riviera zu entdecken.": { en: "Between the Učka mountains and the turquoise waters of the Adriatic — Villa Isabel is ideally placed to discover the Croatian Riviera.", hr: "Između planine Učke i tirkiznog Jadrana — Villa Isabel idealno je smještena za otkrivanje hrvatske rivijere." },
+    "Zwischen den Bergen des Učka und dem türkisen Wasser der Adria liegt die Villa Isabel ideal, um die kroatische Riviera zu entdecken.": { en: "Between the Učka mountains and the turquoise Adriatic, Villa Isabel is the ideal base to explore the Croatian Riviera.", hr: "Između planina Učke i tirkiznog Jadrana, Villa Isabel idealno je polazište za otkrivanje hrvatske rivijere." },
     "So findest du uns": { en: "How to find us", hr: "Kako nas pronaći" },
     "Ruhig gelegen, alles in Reichweite": { en: "Quietly located, everything within reach", hr: "Mirno smještena, sve nadohvat ruke" },
     "Die Villa Isabel liegt in der Ivana i Matka Baštijana 2B in Matulji, in ruhiger Lage oberhalb der Küste — und doch nur wenige Minuten von der Lungomare-Promenade, Stränden, Restaurants und dem Stadtleben von Opatija entfernt.": { en: "Villa Isabel sits at Ivana i Matka Baštijana 2B in Matulji, in a quiet location above the coast — yet just minutes from the Lungomare promenade, beaches, restaurants and the buzz of Opatija.", hr: "Villa Isabel nalazi se u Ivana i Matka Baštijana 2B u Matuljima, na mirnoj lokaciji iznad obale — a ipak tek nekoliko minuta od šetnice Lungomare, plaža, restorana i gradskog života Opatije." },
@@ -251,7 +251,7 @@
 
     // ---- Kontakt ----
     "Kontakt & Buchung": { en: "Contact & booking", hr: "Kontakt i rezervacija" },
-    "Am schönsten direkt: Wunschtermine anfragen oder kurz per WhatsApp schreiben — wir antworten persönlich, meist innerhalb weniger Stunden.": { en: "Best booked directly: send us your preferred dates or a quick WhatsApp message — we reply personally, usually within a few hours.", hr: "Najljepše izravno: pošaljite željene termine ili kratku WhatsApp poruku — odgovaramo osobno, obično u roku od nekoliko sati." },
+    "Am schönsten direkt: Wunschtermine anfragen oder kurz per WhatsApp schreiben. Wir antworten persönlich, meist innerhalb weniger Stunden.": { en: "Best directly: request your dates or send a quick WhatsApp. We reply personally, usually within a few hours.", hr: "Najljepše izravno: pošaljite upit za termine ili kratku WhatsApp poruku. Odgovaramo osobno, obično u roku od nekoliko sati." },
     "Direkter Draht": { en: "Direct line", hr: "Izravna linija" },
     "Am schnellsten per WhatsApp — meist antworten wir innerhalb weniger Stunden.": { en: "Fastest via WhatsApp — we usually reply within a few hours.", hr: "Najbrže putem WhatsAppa — obično odgovaramo unutar nekoliko sati." },
     "WhatsApp öffnen": { en: "Open WhatsApp", hr: "Otvori WhatsApp" },
